@@ -6,8 +6,9 @@
   "icon": "icon.png",
   "publisher": "redhat",
   "license": "Apache-2.0",
+  "type": "module",
   "engines": {
-    "podman-desktop": "^1.6.3"
+    "podman-desktop": "^1.14.0"
   },
   "main": "./dist/extension.js",
   "contributes": {
@@ -16,16 +17,24 @@
   "scripts": {
     "build": "vite build",
     "test": "vitest run --coverage --passWithNoTests",
+    "test:e2e:setup": "xvfb-maybe --auto-servernum --server-args='-screen 0 1280x960x24' --",
+    "test:e2e": "cross-env npm run test:e2e:setup npx playwright test ./tests/src",
     "test:watch": "vitest watch --coverage --passWithNoTests",
     "watch": "tsc -w"
   },
-  "dependencies": {},
   "devDependencies": {
+    "@playwright/test": "^1.49.0",
     "@podman-desktop/api": "^1.6.3",
+    "@podman-desktop/tests-playwright": "next",
     "@types/node": "^18",
+    "cross-env": "^7.0.3",
+    "electron": "^33.2.1",
     "mkdirp": "^3.0.1",
     "typescript": "5.3.3",
     "vite": "^5.0.9",
+    "vitest": "^2.1.8",
+    "xvfb-maybe": "^0.2.1",
     "zip-local": "^0.3.5"
-  }
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }
